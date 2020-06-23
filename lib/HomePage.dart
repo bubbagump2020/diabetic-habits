@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
                    ),
                  );
                },
-               child: Text('Sign Up', style: TextStyle(fontSize: 25))
+               child: Text('Sign Up', style: TextStyle(fontSize: 25)),
              ),
            ),
          ),
@@ -44,10 +44,25 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('Log In', style: TextStyle(fontSize: 25))
+                child: Text('Log In', style: TextStyle(fontSize: 25)),
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50.0),
+            child: SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: RaisedButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                onPressed: () {
+                  // Oauth2 Logic to login with Google
+                },
+                child: Text('Login with Google!', style: TextStyle(fontSize: 25)),
+              ),
+            ),
+          )
         ],
       ),
     );
