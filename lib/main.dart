@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:diabetichabits/SignUp.dart';
+import 'package:diabetichabits/HomePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
-        body: SignUpPage(),
+        body: HomePage(),
       ),
     );
   }
