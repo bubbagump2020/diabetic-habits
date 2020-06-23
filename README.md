@@ -1,4 +1,4 @@
-# diabetichabits
+# Diabetic Habits
 
 A new Flutter application.
 
