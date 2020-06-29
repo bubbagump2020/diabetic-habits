@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "99580321453",
+    "firebase_url": "https://diabetic-habits.firebaseio.com",
+    "project_id": "diabetic-habits",
+    "storage_bucket": "diabetic-habits.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99580321453:android:1734c1013c9f0e46f67024",
+        "android_client_info": {
+          "package_name": "com.diabetichabits"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99580321453-aggnpodbj8so3c5glgs5c023j9te83cg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ43GD0Tot3GmRyqxbJm-lpa8OM3fpcJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99580321453-aggnpodbj8so3c5glgs5c023j9te83cg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
