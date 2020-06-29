@@ -1,4 +1,4 @@
-import 'package:diabetichabits/HomePage.dart';
+import 'package:diabetichabits/SplashPage.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -33,7 +33,7 @@ class _LoginFormState extends State<LoginForm>{
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
               child: TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -42,7 +42,8 @@ class _LoginFormState extends State<LoginForm>{
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+              // More padding between Email and Password Fields?
+              padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 30.0),
               child: TextFormField(
                 obscureText: true,
                 controller: _passwordController,
@@ -51,15 +52,22 @@ class _LoginFormState extends State<LoginForm>{
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-              child: RaisedButton(
-                onPressed: () {
-                  // Login Logic
-                },
-                child: Text('Submit'),
-              ),
-            ),
+           Expanded(
+             child: Align(
+               alignment: FractionalOffset.center,
+               child: SizedBox(
+
+                 width: 300,
+                 child: RaisedButton(
+                     onPressed: () {
+
+
+                     },
+                     child: Text('Submit', style: TextStyle(fontSize: 20))
+                 )
+               )
+             )
+           )
           ],
         ),
       )

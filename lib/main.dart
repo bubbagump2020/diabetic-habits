@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:diabetichabits/SignUp.dart';
-import 'package:diabetichabits/HomePage.dart';
+import 'package:diabetichabits/SplashPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
-        body: HomePage(),
+        body: SplashPage(),
       ),
     );
   }

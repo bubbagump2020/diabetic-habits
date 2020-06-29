@@ -2,7 +2,7 @@ import 'package:diabetichabits/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:diabetichabits/LogIn.dart';
 
-class HomePage extends StatelessWidget {
+class SplashPage extends StatelessWidget {
   Widget build(BuildContext context){
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
