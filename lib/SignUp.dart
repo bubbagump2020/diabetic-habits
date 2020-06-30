@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diabetichabits/UserHome.dart';
+import 'package:flutter/services.dart';
 /*
 *  Import the appropriate firebase packages for backend auth
 *
 * */
-
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -20,50 +21,47 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _passwordConfirmationController = TextEditingController();
 
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
+  final _databaseReference = Firestore.instance.collection('users');
+  final firestoreInstance = Firestore.instance;
   bool _signingup = false;
   String _username;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  _updateProfile () async {
+    FirebaseUser _user = await _firebaseAuth.currentUser();
+    UserUpdateInfo userUpdateInfo = UserUpdateInfo();
+    userUpdateInfo.displayName = _username;
+    await _user.updateProfile(userUpdateInfo);
+    await _user.reload();
+    _user = await _firebaseAuth.currentUser();
+    print(_user);
+  }
+
+  _createRecord () async {
+    await _databaseReference
+        .document("$_emailController")
+        .setData({
+          'username': _username,
+          'email': "$_emailController"
+        });
+  }
+
   _signup () async {
-    if(_passwordController.text.trim() != _passwordConfirmationController.text.trim()){
+    if (_passwordController.text.trim() !=
+        _passwordConfirmationController.text.trim()) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Passwords Do Not Match'),
         duration: Duration(seconds: 3),
       ));
     } else {
-      setState(() {
-        _signingup = true;
+      var result = await firestoreInstance
+          .collection('users')
+          .where('username', isEqualTo: '$_usernameController')
+          .getDocuments();
+      result.documents.forEach((res) {
+        print(res.data);
       });
-     if (_signingup){
-       _scaffoldKey.currentState.showSnackBar(SnackBar(
-         content: Text('Signing you up. Please wait...'),
-         duration: Duration(seconds: 3),
-       ));
-     }
     }
-
-    try{
-      FirebaseUser _user = (await _firebaseAuth.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      )).user;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => UserHome()
-        ),
-      );
-      setState(() {
-        _username = _usernameController.text.trim();
-      });
-    } catch (ex) {
-
-    }
-
-
-
-
   }
 
   Widget build(BuildContext context){
@@ -96,6 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
                 child: TextFormField(
+                  obscureText: true,
                   controller: _passwordController,
                   decoration: InputDecoration(
                     hintText: 'Password'
@@ -105,6 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
                 child: TextFormField(
+                  obscureText: true,
                   controller: _passwordConfirmationController,
                   decoration: InputDecoration(
                     hintText: 'Confirm Password'
@@ -121,6 +121,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       textColor: Colors.white,
                       onPressed: () {
                         _signup();
+//                        _databaseReference.document(_username).setData(
+//                          {
+//                            "username": _usernameController.text,
+//                            "email": _emailController.text,
+//                          }
+//                        ).then((value){
+//
+//                        });
                       },
                       child:  Text('Submit', style: TextStyle(fontSize: 20)),
                     ),
