@@ -37,12 +37,12 @@ class _SignUpPageState extends State<SignUpPage> {
     print(_user);
   }
 
-  _createRecord () async {
+  _createRecord (user_id) async {
     await _databaseReference
-        .document("$_emailController")
+        .document(user_id)
         .setData({
-          'username': _username,
-          'email': "$_emailController"
+          'username': _usernameController.text.trim(),
+          'email': _emailController.text.trim(),
         });
   }
 
@@ -54,13 +54,31 @@ class _SignUpPageState extends State<SignUpPage> {
         duration: Duration(seconds: 3),
       ));
     } else {
-      var result = await firestoreInstance
-          .collection('users')
-          .where('username', isEqualTo: '$_usernameController')
-          .getDocuments();
-      result.documents.forEach((res) {
-        print(res.data);
-      });
+        try {
+          FirebaseUser _user = (await _firebaseAuth.createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+          )).user;
+          _scaffoldKey.currentState.removeCurrentSnackBar();
+          _scaffoldKey.currentState.showSnackBar(
+            SnackBar(
+              content: Text('Creating'),
+            )
+          );
+          _createRecord(_user.uid);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UserHome(),
+            )
+          );
+          setState(() {
+            _signingup = true;
+            _username = _usernameController.text.trim();
+          });
+        } catch (ex) {
+
+        }
     }
   }
 
