@@ -37,9 +37,9 @@ class _SignUpPageState extends State<SignUpPage> {
     print(_user);
   }
 
-  _createRecord (user_id) async {
+  _createRecord (userID) async {
     await _databaseReference
-        .document(user_id)
+        .document(userID)
         .setData({
           'username': _usernameController.text.trim(),
           'email': _emailController.text.trim(),
@@ -88,11 +88,11 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(title: const Text(_title)),
       body: Form(
         child: Container(
-          padding: const EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4.0),
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
                 child: TextFormField(
                   controller: _usernameController,
                   decoration: InputDecoration(
