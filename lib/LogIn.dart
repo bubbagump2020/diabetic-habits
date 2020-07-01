@@ -6,70 +6,65 @@ import 'package:flutter/material.dart';
 *
 * */
 
-class LoginPage extends StatelessWidget{
-  static const String _title = 'Login';
-  Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(title: const Text(_title)),
-      body: LoginForm(),
-    );
-  }
-}
-
-class LoginForm extends StatefulWidget{
+class LoginPage extends StatefulWidget {
   @override
-  _LoginFormState createState() => _LoginFormState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginFormState extends State<LoginForm>{
-  final _formKey = GlobalKey<FormState>();
+class _LoginPageState extends State<LoginPage>{
+  static const String _title = 'Login';
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Widget build(BuildContext context){
-    return Form(
-      key: _formKey,
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
-              child: TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Email'
+
+  Widget build(BuildContext content){
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(title: const Text(_title)),
+      body: Form(
+        child: Container(
+          padding: const EdgeInsets.all(4.0),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                child: TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email'
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              // More padding between Email and Password Fields?
-              padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 30.0),
-              child: TextFormField(
-                obscureText: true,
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Password'
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                child: TextFormField(
+                  obscureText: true,
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    hintText: 'Password'
+                  ),
                 ),
               ),
-            ),
-           Expanded(
-             child: Align(
-               alignment: FractionalOffset.center,
-               child: SizedBox(
-
-                 width: 300,
-                 child: RaisedButton(
-                     onPressed: () {
-
-
-                     },
-                     child: Text('Submit', style: TextStyle(fontSize: 20))
-                 )
-               )
-             )
-           )
-          ],
-        ),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.center,
+                  child: SizedBox(
+                    width: 300,
+                    child: RaisedButton(
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        // Login function here
+                      },
+                      child: Text('Submit', style: TextStyle(fontSize: 20)),
+                    ),
+                  )
+                ),
+              )
+            ],
+          )
+        )
       )
     );
   }
